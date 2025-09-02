@@ -1,1 +1,96 @@
-{% extends 'base.html' %}{% block content %}<h1>Dashboard</h1><p>Total students: {{ total_students }} | Grades: {{ total_grades }}</p><a class='btn btn-primary' href='{{ url_for('students_list') }}'>View Students</a>{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1 class="h2 mb-4">Dashboard</h1>
+
+<!-- Dashboard Cards -->
+<div class="row mb-4">
+  <div class="col-md-3 mb-3">
+    <div class="card dashboard-card students shadow">
+      <div class="card-body text-center">
+        <h6>Total Students</h6>
+        <h3>{{ total_students }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card dashboard-card grades shadow">
+      <div class="card-body text-center">
+        <h6>Grades Assigned</h6>
+        <h3>{{ total_grades }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card dashboard-card averages shadow">
+      <div class="card-body text-center">
+        <h6>Class Average</h6>
+        <h3>{% if class_avg %}{{ "%.2f"|format(class_avg) }}%{% else %}-{% endif %}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card dashboard-card reports shadow">
+      <div class="card-body text-center">
+        <h6>Subjects</h6>
+        <h3>{{ subject_averages|length }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Recent Students -->
+  <div class="col-lg-8">
+    <div class="card shadow mb-4">
+      <div class="card-header d-flex justify-content-between">
+        <h6 class="m-0">Recent Students</h6>
+        <a href="{{ url_for('students_list') }}" class="btn btn-sm btn-primary">View All</a>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead><tr><th>Name</th><th>Roll No</th><th>Average</th><th></th></tr></thead>
+          <tbody>
+            {% for student in recent_students %}
+              <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.roll_number }}</td>
+                <td>{% if student.average() %}{{ "%.2f"|format(student.average()) }}{% else %}-{% endif %}</td>
+                <td><a href="{{ url_for('view_student', student_id=student.id) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></a></td>
+              </tr>
+            {% else %}
+              <tr><td colspan="4" class="text-center">No students yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="col-lg-4">
+    <div class="card shadow mb-3">
+      <div class="card-header">Subject Averages</div>
+      <div class="card-body">
+        {% for subject in subject_averages %}
+          <span class="badge bg-primary me-1">{{ subject.subject }}: {{ "%.1f"|format(subject.average) }}%</span>
+        {% else %}
+          <p>No subject data</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card shadow">
+      <div class="card-header">Top Performer</div>
+      <div class="card-body text-center">
+        {% if top_performer %}
+          <h5>{{ top_performer[0].name }}</h5>
+          <p>Average: {{ "%.2f"|format(top_performer[1]) }}%</p>
+        {% else %}
+          <p>No top performer data</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
