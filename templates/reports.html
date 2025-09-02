@@ -1,1 +1,23 @@
-{% extends 'base.html' %}{% block content %}<h1>Averages</h1><table class='table'><tr><th>Roll</th><th>Name</th><th>Avg</th></tr>{% for row in averages %}<tr><td>{{ row.student.roll_number }}</td><td>{{ row.student.name }}</td><td>{% if row.average is not none %}{{ '%.2f'|format(row.average) }}{% else %}-{% endif %}</td></tr>{% endfor %}</table>{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Student Averages{% endblock %}
+{% block content %}
+<h1 class="h2 mb-4">Student Averages</h1>
+<div class="card shadow">
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead><tr><th>Roll No</th><th>Name</th><th>Average</th></tr></thead>
+      <tbody>
+        {% for row in averages %}
+          <tr>
+            <td>{{ row.student.roll_number }}</td>
+            <td>{{ row.student.name }}</td>
+            <td>{% if row.average %}{{ "%.2f"|format(row.average) }}{% else %}-{% endif %}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="3" class="text-center">No data</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
