@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h1>Topper</h1><form method='post'><input name='subject' class='form-control' placeholder='Subject'><button class='btn btn-primary mt-2'>Find</button></form>{% if topper %}<p>Topper: {{ topper.name }} ({{ topper.roll_number }})</p>{% endif %}{% endblock %}
