@@ -1,1 +1,20 @@
-{% extends 'base.html' %}{% block content %}<h1>Class Average</h1><form method='post'><input name='subject' class='form-control' placeholder='Subject'><button class='btn btn-primary mt-2'>Calc</button></form>{% if avg is not none %}<p>Average for {{ subject }}: {{ '%.2f'|format(avg) }}</p>{% endif %}{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Class Average{% endblock %}
+{% block content %}
+<h1 class="h2 mb-4">Class Average by Subject</h1>
+<div class="card shadow">
+  <div class="card-body">
+    <form method="post" class="mb-3">
+      <div class="input-group">
+        <input name="subject" class="form-control" placeholder="Enter subject name" required>
+        <button class="btn btn-primary">Calculate</button>
+      </div>
+    </form>
+    {% if avg is not none %}
+      <div class="alert alert-info">
+        Average for <strong>{{ subject }}</strong> is <strong>{{ "%.2f"|format(avg) }}</strong>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
