@@ -28,35 +28,6 @@ Deployed on **Render** → [Live Demo](https://student-performance-tracker-3sil.
 
 ---
 
-## 📂 Project Structure
-student-performance-tracker/
-│
-├── app.py # Main Flask application
-├── requirements.txt # Python dependencies
-├── Procfile # For Render deployment
-├── students.db # SQLite database (auto created)
-│
-├── templates/ # HTML templates (Jinja2)
-│ ├── base.html
-│ ├── index.html
-│ ├── students_list.html
-│ ├── add_student.html
-│ ├── add_grade.html
-│ ├── view_student.html
-│ ├── reports.html
-│ ├── topper.html
-│ ├── class_average.html
-│ └── backup.html
-│
-└── static/
-└── css/
-└── style.css # Custom styles
-
-yaml
-Copy code
-
----
-
 ## ⚙️ Local Setup
 ### 1️⃣ Clone the repository
 ```bash
