@@ -1,1 +1,62 @@
-<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Tracker</title><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'></head><body><nav class='navbar navbar-dark bg-primary'><div class='container'><a class='navbar-brand' href='/'>Student Tracker</a></div></nav><div class='container mt-4'>{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category,msg in messages %}<div class='alert alert-{{category}}'>{{msg}}</div>{% endfor %}{% endif %}{% endwith %}{% block content %}{% endblock %}</div></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Student Performance Tracker{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+          <i class="bi bi-graph-up"></i> EduTrack
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'students_list' %}active{% endif %}" href="{{ url_for('students_list') }}"><i class="bi bi-people"></i> Students</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'add_student' %}active{% endif %}" href="{{ url_for('add_student') }}"><i class="bi bi-person-plus"></i> Add Student</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'add_grade' %}active{% endif %}" href="{{ url_for('add_grade') }}"><i class="bi bi-journal-plus"></i> Add Grade</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'calculate_averages' %}active{% endif %}" href="{{ url_for('calculate_averages') }}"><i class="bi bi-calculator"></i> Averages</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'topper' %}active{% endif %}" href="{{ url_for('topper') }}"><i class="bi bi-trophy"></i> Toppers</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'class_average' %}active{% endif %}" href="{{ url_for('class_average') }}"><i class="bi bi-graph-up"></i> Class Average</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.endpoint == 'backup' %}active{% endif %}" href="{{ url_for('backup') }}"><i class="bi bi-cloud-upload"></i> Backup</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Flash messages -->
+    <div class="container mt-4">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-3 bg-light">
+      <div class="container d-flex justify-content-between">
+        <span>© 2023 EduTrack - Student Performance Tracker</span>
+        <span>Powered by Flask</span>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
