@@ -1,1 +1,20 @@
-{% extends 'base.html' %}{% block content %}<h1>Topper</h1><form method='post'><input name='subject' class='form-control' placeholder='Subject'><button class='btn btn-primary mt-2'>Find</button></form>{% if topper %}<p>Topper: {{ topper.name }} ({{ topper.roll_number }})</p>{% endif %}{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Subject Topper{% endblock %}
+{% block content %}
+<h1 class="h2 mb-4">Find Topper</h1>
+<div class="card shadow">
+  <div class="card-body">
+    <form method="post" class="mb-3">
+      <div class="input-group">
+        <input name="subject" class="form-control" placeholder="Enter subject name" required>
+        <button class="btn btn-primary">Find</button>
+      </div>
+    </form>
+    {% if topper %}
+      <div class="alert alert-success">
+        Topper in {{ subject }}: <strong>{{ topper.name }}</strong> ({{ topper.roll_number }})
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
