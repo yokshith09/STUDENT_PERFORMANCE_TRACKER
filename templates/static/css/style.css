@@ -1,0 +1,48 @@
+:root {
+    --primary: #4e73df;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --light: #f8f9fc;
+    --dark: #5a5c69;
+}
+
+.student-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.dashboard-card {
+    border-left: 4px solid;
+}
+.dashboard-card.students { border-left-color: var(--primary); }
+.dashboard-card.averages { border-left-color: var(--success); }
+.dashboard-card.grades { border-left-color: var(--info); }
+.dashboard-card.reports { border-left-color: var(--warning); }
+
+.stat-card { transition: transform 0.2s; }
+.stat-card:hover { transform: translateY(-5px); }
+
+.subject-badge {
+    font-size: 0.85rem;
+    padding: 0.35em 0.65em;
+}
+
+.action-btn {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
