@@ -1,1 +1,1 @@
-
+{% extends 'base.html' %}{% block content %}<h1>Dashboard</h1><p>Total students: {{ total_students }} | Grades: {{ total_grades }}</p><a class='btn btn-primary' href='{{ url_for('students_list') }}'>View Students</a>{% endblock %}
