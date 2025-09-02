@@ -1,1 +1,27 @@
-{% extends 'base.html' %}{% block content %}<h1>{{ student.name }}</h1><p>Roll: {{ student.roll_number }}</p><p>Average: {% if student.average() %}{{ '%.2f'|format(student.average()) }}{% else %}-{% endif %}</p><h3>Grades</h3><ul>{% for g in student.grades %}<li>{{ g.subject }}: {{ g.score }}</li>{% else %}<li>No grades</li>{% endfor %}</ul>{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Student Details{% endblock %}
+{% block content %}
+<h1 class="h2 mb-4">{{ student.name }} ({{ student.roll_number }})</h1>
+<div class="card shadow">
+  <div class="card-body">
+    <p><strong>Average:</strong>
+      {% if student.average() %}{{ "%.2f"|format(student.average()) }}{% else %}-{% endif %}
+    </p>
+    <h5>Grades</h5>
+    {% if student.grades %}
+      <table class="table">
+        <thead><tr><th>Subject</th><th>Score</th></tr></thead>
+        <tbody>
+          {% for grade in student.grades %}
+            <tr><td>{{ grade.subject }}</td><td>{{ "%.2f"|format(grade.score) }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No grades yet.</p>
+    {% endif %}
+    <a href="{{ url_for('add_grade') }}" class="btn btn-success">Add Grade</a>
+    <a href="{{ url_for('students_list') }}" class="btn btn-secondary">Back</a>
+  </div>
+</div>
+{% endblock %}
