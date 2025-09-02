@@ -1,1 +1,23 @@
-{% extends 'base.html' %}{% block content %}<h1>Backup</h1><form method='post'><input type='hidden' name='action' value='export'><button class='btn btn-primary'>Export</button></form><hr><form method='post' enctype='multipart/form-data'><input type='hidden' name='action' value='import'><input type='file' name='file'><button class='btn btn-success mt-2'>Import</button></form>{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Data Backup{% endblock %}
+{% block content %}
+<h1 class="h2 mb-4">Data Backup</h1>
+<div class="card shadow">
+  <div class="card-body">
+    <h5>Export Data</h5>
+    <form method="post" class="mb-4">
+      <input type="hidden" name="action" value="export">
+      <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Export</button>
+    </form>
+
+    <h5>Import Data</h5>
+    <form method="post" enctype="multipart/form-data" class="mb-4">
+      <input type="hidden" name="action" value="import">
+      <input type="file" name="file" class="form-control mb-2" accept=".txt" required>
+      <button type="submit" class="btn btn-success"><i class="bi bi-upload"></i> Import</button>
+    </form>
+
+    <div class="alert alert-info"><i class="bi bi-info-circle"></i> Importing will replace current data.</div>
+  </div>
+</div>
+{% endblock %}
