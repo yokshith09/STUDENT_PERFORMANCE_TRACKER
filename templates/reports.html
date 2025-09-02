@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h1>Averages</h1><table class='table'><tr><th>Roll</th><th>Name</th><th>Avg</th></tr>{% for row in averages %}<tr><td>{{ row.student.roll_number }}</td><td>{{ row.student.name }}</td><td>{% if row.average is not none %}{{ '%.2f'|format(row.average) }}{% else %}-{% endif %}</td></tr>{% endfor %}</table>{% endblock %}
