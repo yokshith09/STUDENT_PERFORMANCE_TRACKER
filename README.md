@@ -1,5 +1,3 @@
-# STUDENT_PERFORMANCE_TRACKER
-
 # 🎓 Student Performance Tracker
 
 A Flask-based web application to manage students, track their grades, calculate averages, and generate reports.  
